@@ -10,8 +10,8 @@ define([
 ], function ($, _, Backbone, JST, morris, ListRowView) {
     'use strict';
 
-    var PanelView = Backbone.View.extend({
-        template: JST['app/scripts/templates/accounts/panel.ejs'],
+    var ListView = Backbone.View.extend({
+        template: JST['app/scripts/templates/accounts/list.ejs'],
 
         tagName: 'div',
 
@@ -32,5 +32,5 @@ define([
         }
     });
 
-    return PanelView;
+    return ListView;
 });

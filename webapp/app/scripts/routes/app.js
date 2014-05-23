@@ -14,19 +14,29 @@ define([
             '': 'showDashboard',
             'dashboard': 'showDashboard',
             'accounts': 'showAccounts',
+            'accounts/add': 'showAccountAdd',
             'signout': 'signout'
         },
 
         initialize: function(options) {
             this.app = options.app;
+            this.dashBoardView = new DashboardView();
+            this.accountsView = new AccountsView();
         },
 
         showDashboard: function() {
-            this.app.showView(new DashboardView()).loadData();
+            this.app.showView(this.dashBoardView).loadData();
         },
 
         showAccounts: function() {
-            this.app.showView(new AccountsView()).loadData();
+            this.app.showView(this.accountsView);
+            this.accountsView.showList();
+            this.accountsView.loadData();
+        },
+
+        showAccountAdd: function() {
+            this.app.showView(this.accountsView);
+            this.accountsView.showAddForm();
         },
 
         signout: function() {
