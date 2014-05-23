@@ -4,16 +4,16 @@ define([
     'jquery',
     'backbone',
     'views/dashboard',
-    'views/blank',
+    'views/accounts',
     'views/login'
-], function ($, Backbone, DashboardView, BlankView, LoginView) {
+], function ($, Backbone, DashboardView, AccountsView, LoginView) {
     'use strict';
 
     var AppRouter = Backbone.Router.extend({
         routes: {
             '': 'showDashboard',
             'dashboard': 'showDashboard',
-            'blank': 'showBlank',
+            'accounts': 'showAccounts',
             'signout': 'signout'
         },
 
@@ -25,8 +25,8 @@ define([
             this.app.showView(new DashboardView()).loadData();
         },
 
-        showBlank: function() {
-            this.app.showView(new BlankView());
+        showAccounts: function() {
+            this.app.showView(new AccountsView()).loadData();
         },
 
         signout: function() {

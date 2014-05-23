@@ -1,0 +1,18 @@
+[{
+  "id": 1,
+  "name": "bank-account",
+    "description": "Chase bank account",
+    "type": "Asset"
+},
+{
+  "id": 2,
+  "name": "interest",
+    "description": "Interest income",
+    "type": "Income"
+},
+{
+  "id": 3,
+  "name": "management",
+    "description": "Management Expense",
+    "type": "Expense"
+}]
