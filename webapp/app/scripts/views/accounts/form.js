@@ -32,7 +32,7 @@ define([
             if (this.model) this.bindModel(this.model);
         },
 
-        bindModel: function(model) {
+        bindModel: function() {
             this.modelBinder.bind(this.model, this.el);
         },
 
