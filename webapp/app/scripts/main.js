@@ -24,7 +24,8 @@ require.config({
         raphael: '../bower_components/raphael/raphael',
         morris: '../bower_components/morris/morris',
         viewManager: '../bower_components/backbone-viewmanager/backbone.viewmanager',
-        localStorage: '../bower_components/backbone.localstorage/backbone.localstorage'
+        localStorage: '../bower_components/backbone.localstorage/backbone.localstorage',
+        modelBinder: '../bower_components/backbone.modelbinder/backbone.modelbinder'
     }
 });
 

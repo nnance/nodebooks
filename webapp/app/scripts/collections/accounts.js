@@ -2,11 +2,13 @@
 
 define([
     'underscore',
-    'backbone'
-], function (_, Backbone) {
+    'backbone',
+    'models/accounts'
+], function (_, Backbone, AccountsModel) {
     'use strict';
 
     var AccountsCollection = Backbone.Collection.extend({
+        model: AccountsModel,
         url: 'scripts/data/accounts.json'
     });
 

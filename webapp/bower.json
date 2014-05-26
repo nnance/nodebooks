@@ -14,7 +14,8 @@
     "backbone.localstorage": "~1.1.7",
     "raphael": "~2.1.2",
     "morris": "https://github.com/morrisjs/morris.js.git#~0.5.0",
-    "backbone-viewmanager": "https://github.com/nnance/backbone-viewmanager.git"
+    "backbone-viewmanager": "https://github.com/nnance/backbone-viewmanager.git",
+    "backbone.modelbinder": "~1.0.5"
   },
   "devDependencies": {}
 }

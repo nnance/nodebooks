@@ -5,7 +5,8 @@ define([
     'underscore',
     'backbone',
     'templates',
-], function ($, _, Backbone, JST) {
+    'modelBinder'
+], function ($, _, Backbone, JST, ModelBinder) {
     'use strict';
 
     var FormView = Backbone.View.extend({
@@ -16,18 +17,27 @@ define([
         className: 'panel panel-default',
 
         initialize: function (options) {
+            this.modelBinder = new Backbone.ModelBinder();
             if (options && options.id) {
-                this.listenTo(this.collection, 'sync', _.partial(this.loadModel,options));
-                this.collection.fetch();
+                this.collection.fetch({success: function() {
+                    this.model = this.collection.get(options.id);
+                    this.bindModel();
+                }.bind(this)});
+            } else {
+                this.model = new this.collection.model();
             }
         },
 
-        loadModel: function(id) {
-            this.model = this.collection.get(id);
-            if (this.model) {
-                this.listenTo(this.model, 'change', this.render);
-                this.render();
-            }
+        onRender: function() {
+            if (this.model) this.bindModel(this.model);
+        },
+
+        bindModel: function(model) {
+            this.modelBinder.bind(this.model, this.el);
+        },
+
+        onClose: function() {
+            this.modelBinder.unbind();
         }
     });
 
