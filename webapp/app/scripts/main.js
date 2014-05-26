@@ -34,10 +34,12 @@ require([
     'backbone',
     'viewManager',
     'views/app',
-    'routes/app'
-], function ($, bootstrap, Backbone, ViewManager, AppView, AppRouter) {
+    'routes/app',
+    'routes/accounts'
+], function ($, bootstrap, Backbone, ViewManager, AppView, AppRouter, AccountsRouter) {
 
     var appView = new AppView();
     var appRouter = new AppRouter({app: appView});
+    var accountsRouter = new AccountsRouter({app: appView});
     appView.start();
 });

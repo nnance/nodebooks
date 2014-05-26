@@ -6,20 +6,20 @@
     <form>
         <div class="form-group">
             <label>Name</label>
-            <input class="form-control" name="name">
+            <input class="form-control" name="name" value="<%= getAttr('name')%>">
             <p class="help-block">Example block-level help text here.</p>
         </div>
         <div class="form-group">
             <label>Description</label>
-            <input class="form-control" name="description">
+            <input class="form-control" name="description" value="<%= getAttr('description')%>">
         </div>
         <div class="form-group">
             <label>Type</label>
             <select class="form-control" name="type">
-                <option>Asset</option>
-                <option>Liabilities</option>
-                <option>Income</option>
-                <option>Expense</option>
+                <option <%= getAttr('type') === 'Asset' ? 'selected' : ''%>>Asset</option>
+                <option <%= getAttr('type') === 'Liabilities' ? 'selected' : ''%>>Liabilities</option>
+                <option <%= getAttr('type') === 'Income' ? 'selected' : ''%>>Income</option>
+                <option <%= getAttr('type') === 'Expense' ? 'selected' : ''%>>Expense</option>
             </select>
         </div>
     </form>

@@ -13,8 +13,16 @@ define([
 
         tagName: 'tr',
 
+        events: {
+          'click': 'showItem'
+        },
+
         initialize: function () {
             this.listenTo(this.model, 'change', this.render);
+        },
+
+        showItem: function() {
+            Backbone.history.navigate('#accounts/' + this.model.id, true);
         }
 
     });

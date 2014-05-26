@@ -18,24 +18,23 @@ define([
             this.accounts = new Accounts();
         },
 
-        showList: function () {
+        showView: function(view) {
             this.removeSubViews();
-            this.addSubView({
+            this.addSubView(view);
+        },
+
+        showList: function () {
+            this.showView({
                 view: new ListView({collection: this.accounts}),
                 selector: '#col-left'
             });
         },
 
-        showAddForm: function() {
-            this.removeSubViews();
-            this.addSubView({
-                view: new FormView(),
+        showForm: function(id) {
+            this.showView({
+                view: new FormView({collection: this.accounts, id: id}),
                 selector: '#col-left'
             });
-        },
-
-        loadData: function() {
-            this.accounts.fetch({reset: true});
         }
     });
 

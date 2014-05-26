@@ -16,8 +16,19 @@ define([
         className: 'panel panel-default',
 
         initialize: function (options) {
-            // this.listenTo(this.model, 'reset', this.render);
+            if (options && options.id) {
+                this.listenTo(this.collection, 'sync', _.partial(this.loadModel,options));
+                this.collection.fetch();
+            }
         },
+
+        loadModel: function(id) {
+            this.model = this.collection.get(id);
+            if (this.model) {
+                this.listenTo(this.model, 'change', this.render);
+                this.render();
+            }
+        }
     });
 
     return FormView;

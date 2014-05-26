@@ -5,9 +5,8 @@ define([
     'underscore',
     'backbone',
     'templates',
-    'morris',
     'views/accounts/list-row'
-], function ($, _, Backbone, JST, morris, ListRowView) {
+], function ($, _, Backbone, JST, ListRowView) {
     'use strict';
 
     var ListView = Backbone.View.extend({
@@ -18,7 +17,8 @@ define([
         className: 'panel panel-default',
 
         initialize: function (options) {
-            this.listenTo(this.collection, 'reset', this.updateTable);
+            this.listenTo(this.collection, 'sync', this.updateTable);
+            this.collection.fetch();
         },
 
         updateTable: function() {
