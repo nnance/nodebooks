@@ -1,0 +1,8 @@
+<div class="alert alert-danger">
+  The following errors occurred:
+  <ul>
+    <% collection.forEach(function(error){%>
+      <li><%=error.get('message')%></li>
+    <%});%>
+  </ul>
+</div>
