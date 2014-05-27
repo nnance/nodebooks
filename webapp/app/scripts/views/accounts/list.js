@@ -10,26 +10,29 @@ define([
     'use strict';
 
     var ListView = Backbone.View.extend({
-        template: JST['app/scripts/templates/accounts/list.ejs'],
+      template: JST['app/scripts/templates/accounts/list.ejs'],
 
-        tagName: 'div',
+      tagName: 'div',
 
-        className: 'panel panel-default',
+      className: 'panel panel-default',
 
-        initialize: function (options) {
-            this.listenTo(this.collection, 'sync', this.updateTable);
-            this.collection.fetch();
-        },
+      initialize: function (options) {
+        this.listenTo(this.collection, 'sync', this.updateTable);
+      },
 
-        updateTable: function() {
-            this.removeSubViews();
-            this.collection.forEach(function(account){
-                this.addSubView({
-                    view: new ListRowView({model: account}),
-                    selector: 'tbody'
-                });
-            }, this);
-        }
+      onRender: function() {
+        this.updateTable();
+      },
+
+      updateTable: function() {
+        this.removeSubViews();
+        this.collection.forEach(function(account){
+          this.addSubView({
+            view: new ListRowView({model: account}),
+            selector: 'tbody'
+          });
+        }, this);
+      }
     });
 
     return ListView;

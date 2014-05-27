@@ -12,30 +12,31 @@ define([
     'use strict';
 
     var AccountsView = Backbone.View.extend({
-        template: JST['app/scripts/templates/accounts.ejs'],
+      template: JST['app/scripts/templates/accounts.ejs'],
 
-        initialize: function () {
-            this.accounts = new Accounts();
-        },
+      initialize: function () {
+        this.accounts = new Accounts();
+      },
 
-        showView: function(view) {
-            this.removeSubViews();
-            this.addSubView(view);
-        },
+      loadView: function(view) {
+        $.when(
+          this.accounts.fetch()
+        ).done(function(){
+          this.removeSubViews();
+          this.addSubView({
+            view: view,
+            selector: '#col-left'
+          });
+        }.bind(this));
+      },
 
-        showList: function () {
-            this.showView({
-                view: new ListView({collection: this.accounts}),
-                selector: '#col-left'
-            });
-        },
+      showList: function () {
+        this.loadView(new ListView({collection: this.accounts}));
+      },
 
-        showForm: function(id) {
-            this.showView({
-                view: new FormView({collection: this.accounts, id: id}),
-                selector: '#col-left'
-            });
-        }
+      showForm: function(id) {
+        this.loadView(new FormView({collection: this.accounts, id: id}));
+      }
     });
 
     return AccountsView;
