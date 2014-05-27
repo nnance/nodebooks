@@ -18,24 +18,30 @@ define([
         this.accounts = new Accounts();
       },
 
-      loadView: function(view) {
-        $.when(
+      loadData: function(view) {
+        return $.when(
           this.accounts.fetch()
-        ).done(function(){
-          this.removeSubViews();
-          this.addSubView({
-            view: view,
-            selector: '#col-left'
-          });
-        }.bind(this));
+        );
+      },
+
+      showView: function(view) {
+        this.removeSubViews();
+        this.addSubView({
+          view: view,
+          selector: '#col-left'
+        });
       },
 
       showList: function () {
-        this.loadView(new ListView({collection: this.accounts}));
+        this.loadData().done(function(){
+          this.showView(new ListView({collection: this.accounts}));
+        }.bind(this));
       },
 
       showForm: function(id) {
-        this.loadView(new FormView({collection: this.accounts, id: id}));
+        this.loadData().done(function(){
+          this.showView(new FormView({collection: this.accounts, id: id}));
+        }.bind(this));
       }
     });
 

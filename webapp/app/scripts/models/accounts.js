@@ -7,7 +7,9 @@ define([
     'use strict';
 
     var AccountsModel = Backbone.Model.extend({
-        url: 'scripts/data/accounts.json',
+        urlRoot: 'http://localhost:3000/api/accounts',
+
+        idAttribute: '_id',
 
         initialize: function() {
         },
@@ -22,6 +24,9 @@ define([
             }
             if (!attrs.description || (attrs.description.length === 0)) {
                 errors.add({attr: 'description', message: 'Description is required!'});
+            }
+            if (!attrs.type || (attrs.type.length === 0)) {
+                errors.add({attr: 'type', message: 'Type is required!'});
             }
 
             if (errors.length > 0) return errors;

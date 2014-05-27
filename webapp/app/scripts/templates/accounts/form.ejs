@@ -5,9 +5,13 @@
 <div class="panel-body">
     <form>
         <div class="form-group">
+            <label>Number</label>
+            <input class="form-control" name="number">
+            <p class="help-block">Account number should be defined based on type.</p>
+        </div>
+        <div class="form-group">
             <label>Name</label>
             <input class="form-control" name="name">
-            <p class="help-block">Example block-level help text here.</p>
         </div>
         <div class="form-group">
             <label>Description</label>
@@ -16,6 +20,7 @@
         <div class="form-group">
             <label>Type</label>
             <select class="form-control" name="type">
+                <option></option>
                 <option>Asset</option>
                 <option>Liabilities</option>
                 <option>Income</option>

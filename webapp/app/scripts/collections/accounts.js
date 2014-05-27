@@ -9,7 +9,7 @@ define([
 
     var AccountsCollection = Backbone.Collection.extend({
         model: AccountsModel,
-        url: 'scripts/data/accounts.json'
+        url: 'http://localhost:3000/api/accounts'
     });
 
     return AccountsCollection;
