@@ -58,8 +58,70 @@ module.exports = function (grunt) {
             test: {
                 files: ['<%= yeoman.app %>/scripts/{,*/}*.js', 'test/spec/**/*.js'],
                 tasks: ['test:true']
+            },
+            express: {
+              files: [
+                'server.js',
+                'api/**/*.{js,json}'
+              ],
+              tasks: ['newer:jshint:server', 'express:dev', 'wait'],
+              options: {
+                livereload: true,
+                nospawn: true //Without this option specified express won't be reloaded
+              }
             }
         },
+        express: {
+          options: {
+            port: process.env.PORT || 9000
+          },
+          dev: {
+            options: {
+              script: 'server.js',
+              debug: true
+            }
+          },
+          prod: {
+            options: {
+              script: 'dist/server.js',
+              node_env: 'production'
+            }
+          }
+        },
+        // Debugging with node inspector
+        'node-inspector': {
+          custom: {
+            options: {
+              'web-host': 'localhost'
+            }
+          }
+        },
+
+        // Use nodemon to run server in debug mode with an initial breakpoint
+        nodemon: {
+          debug: {
+            script: 'server.js',
+            options: {
+              nodeArgs: ['--debug-brk'],
+              env: {
+                PORT: process.env.PORT || 9000
+              },
+              callback: function (nodemon) {
+                nodemon.on('log', function (event) {
+                  console.log(event.colour);
+                });
+
+                // opens browser on initial server start
+                nodemon.on('config:update', function () {
+                  setTimeout(function () {
+                    require('open')('http://localhost:8080/debug?port=5858');
+                  }, 500);
+                });
+              }
+            }
+          }
+        },
+
         connect: {
             options: {
                 port: grunt.option('port') || SERVER_PORT,
@@ -240,7 +302,9 @@ module.exports = function (grunt) {
                         '.htaccess',
                         'images/{,*/}*.{webp,gif}',
                         'styles/fonts/{,*/}*.*',
-                        'bower_components/sass-bootstrap/fonts/*.*'
+                        'scripts/data/*.*',
+                        'bower_components/sass-bootstrap/fonts/*.*',
+                        'bower_components/font-awesome/fonts/*.*'
                     ]
                 }]
             }
@@ -275,6 +339,22 @@ module.exports = function (grunt) {
         }
     });
 
+    // Used for delaying livereload until after server has restarted
+    grunt.registerTask('wait', function () {
+      grunt.log.ok('Waiting for server reload...');
+
+      var done = this.async();
+
+      setTimeout(function () {
+        grunt.log.writeln('Done waiting!');
+        done();
+      }, 500);
+    });
+
+    grunt.registerTask('express-keepalive', 'Keep grunt running', function() {
+      this.async();
+    });
+
     grunt.registerTask('createDefaultTemplate', function () {
         grunt.file.write('.tmp/scripts/templates.js', 'this.JST = this.JST || {};');
     });
@@ -306,7 +386,8 @@ module.exports = function (grunt) {
             'createDefaultTemplate',
             'jst',
             'compass:server',
-            'connect:livereload',
+            // 'connect:livereload',
+            'express:dev',
             'open:server',
             'watch'
         ]);

@@ -1,6 +1,6 @@
 {
-  "name": "backbonebootstrapadmin",
-  "version": "0.0.0",
+  "name": "nodebooks",
+  "version": "0.0.1",
   "dependencies": {
     "sass-bootstrap": "~3.0.2",
     "jquery": "~2.1.0",
