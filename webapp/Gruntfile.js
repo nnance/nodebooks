@@ -122,53 +122,14 @@ module.exports = function (grunt) {
           }
         },
 
-        connect: {
-            options: {
-                port: grunt.option('port') || SERVER_PORT,
-                // change this to '0.0.0.0' to access the server from outside
-                hostname: 'localhost'
-            },
-            livereload: {
-                options: {
-                    middleware: function (connect) {
-                        return [
-                            lrSnippet,
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, yeomanConfig.app)
-                        ];
-                    }
-                }
-            },
-            test: {
-                options: {
-                    port: 9001,
-                    middleware: function (connect) {
-                        return [
-                            lrSnippet,
-                            mountFolder(connect, '.tmp'),
-                            mountFolder(connect, 'test'),
-                            mountFolder(connect, yeomanConfig.app)
-                        ];
-                    }
-                }
-            },
-            dist: {
-                options: {
-                    middleware: function (connect) {
-                        return [
-                            mountFolder(connect, yeomanConfig.dist)
-                        ];
-                    }
-                }
-            }
-        },
         open: {
             server: {
-                path: 'http://localhost:<%= connect.options.port %>',
+                path: 'http://localhost:<%= express.options.port %>',
                 app: 'Google Chrome Canary'
             },
             test: {
-                path: 'http://localhost:<%= connect.test.options.port %>'
+                path: 'http://localhost:<%= express.options.port %>',
+                app: 'Google Chrome Canary'
             }
         },
         clean: {
@@ -179,6 +140,12 @@ module.exports = function (grunt) {
             options: {
                 jshintrc: '.jshintrc',
                 reporter: require('jshint-stylish')
+            },
+            server: {
+              options: {
+                jshintrc: 'api/.jshintrc'
+              },
+            src: [ 'api/{,*/}*.js']
             },
             all: [
                 'Gruntfile.js',
@@ -191,7 +158,7 @@ module.exports = function (grunt) {
             all: {
                 options: {
                     run: true,
-                    src: ['http://localhost:<%= connect.test.options.port %>/index.html']
+                    src: ['http://localhost:<%= express.test.options.port %>/index.html']
                 }
             }
         },
@@ -305,6 +272,14 @@ module.exports = function (grunt) {
                         'scripts/data/*.*',
                         'bower_components/sass-bootstrap/fonts/*.*',
                         'bower_components/font-awesome/fonts/*.*'
+                    ]
+                },{
+                    expand: true,
+                    dest: '<%= yeoman.dist %>',
+                    src: [
+                      'package.json',
+                      'server.js',
+                      'api/**/*'
                     ]
                 }]
             }

@@ -8,7 +8,7 @@ var config = {
     app: {
       name: 'nodebooks-api'
     },
-    port: 3000,
+    port: process.env.PORT || 3000,
     db: 'mongodb://localhost/nodebooks-development'
   },
 
@@ -17,7 +17,7 @@ var config = {
     app: {
       name: 'nodebooks-api'
     },
-    port: 3000,
+    port: process.env.PORT || 3000,
     db: 'mongodb://localhost/nodebooks-test'
   },
 
@@ -26,7 +26,7 @@ var config = {
     app: {
       name: 'nodebooks-api'
     },
-    port: 80,
+    port: process.env.PORT || 80,
     db: 'mongodb://localhost/nodebooks'
   }
 };

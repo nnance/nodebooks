@@ -7,7 +7,7 @@ define([
     'use strict';
 
     var AccountsModel = Backbone.Model.extend({
-        urlRoot: 'http://localhost:3000/api/accounts',
+        urlRoot: 'api/accounts',
 
         idAttribute: '_id',
 
