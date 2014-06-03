@@ -27,7 +27,7 @@ var config = {
       name: 'nodebooks-api'
     },
     port: process.env.PORT || 80,
-    db: 'mongodb://localhost/nodebooks'
+    db: 'mongodb://172.31.46.252/nodebooks'
   }
 };
 

@@ -1,6 +1,6 @@
 {
   "name": "nodebooks",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "dependencies": {
     "cors": "~2.1.1",
     "csv": "^0.4.0",
