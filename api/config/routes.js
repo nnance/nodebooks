@@ -17,4 +17,11 @@ module.exports = function(app){
 	app.post('/api/accounts', Account.addAccount);
 	app.put('/api/accounts/:id', Account.updateAccount);
 	app.delete('/api/accounts/:id', Account.deleteAccount);
+	//transaction route
+	var Transaction = require('../app/controllers/transaction');
+	app.get('/api/transactions', Transaction.getList);
+	app.get('/api/transactions/:id', Transaction.getById);
+	app.post('/api/transactions', Transaction.addTransaction);
+	app.put('/api/transactions/:id', Transaction.updateTransaction);
+	app.delete('/api/transactions/:id', Transaction.deleteTransaction);
 };
